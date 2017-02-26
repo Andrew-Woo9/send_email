@@ -19,8 +19,16 @@ from pathlib import Path
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # json 로드
-config_file_content = Path(__file__).parents[2].joinpath('.conf', 'settings_loca.json').opne().read()
+config_file_content = Path(__file__).parents[2].joinpath('.conf', 'settings_local.json').open().read()
 config = json.loads(config_file_content)
+
+#E-mail 관련 설정
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = config['email']['host']
+EMAIL_USER_USER = config['email']['user_id']
+EMAIL_USER_PASSWORD = config['email']['user_password']
+EMAIL_POST = config['email']['port']
+EMAIL_USE_TLS = True
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
